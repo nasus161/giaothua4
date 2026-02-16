@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đón giao thừa với mình nhé?</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fbc2eb);
+      background-size: 400% 400%;
+      animation: gradient 8s ease infinite;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* HOA MAI */
+    .flower {
+      position: fixed;
+      top: -50px;
+      font-size: 30px;
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(-50px) rotate(0deg);
+      }
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    .card {
+      background: white;
+      padding: 50px 70px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 15px;
+      color: #ff4b7d;
+    }
+
+    #message {
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: #555;
+      min-height: 30px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 80px;
+    }
+
+    button {
+      padding: 14px 34px;
+      font-size: 20px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yes {
+      background: #ff4b7d;
+      color: white;
+      z-index: 2;
+    }
+
+    #no {
+      background: #ddd;
+      position: absolute;
+      margin-left: 140px;
+    }
+
+    /* FULLSCREEN CHUẨN */
+    #yes.fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      font-size: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HOA MAI -->
+  <div class="flower" style="left:10%; animation-duration:8s;">🌼</div>
+  <div class="flower" style="left:25%; animation-duration:10s;">🌼</div>
+  <div class="flower" style="left:40%; animation-duration:7s;">🌼</div>
+  <div class="flower" style="left:55%; animation-duration:9s;">🌼</div>
+  <div class="flower" style="left:70%; animation-duration:11s;">🌼</div>
+  <div class="flower" style="left:85%; animation-duration:8s;">🌼</div>
+
+  <div class="card">
+    <h1>Đón giao thừa cùng mình đêm nay nha? 🎆</h1>
+    <div id="message"></div>
+    <div class="buttons">
+      <button id="yes">Có 💖</button>
+      <button id="no">Không 😢</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const message = document.getElementById("message");
+
+    let count = 0;
+
+    const texts = [
+      "Đi màaaaaa 🥺👉👈",
+      "Cậu không được từ chối đâuuu, mình sẽ buồn lắm đó 😭💔",
+      "Suy nghĩ lại đi màaa 😖",
+      "Bấm Có đi màaa 😤💗",
+      "Không trốn được đâu baby 😈🔥"
+    ];
+
+    noBtn.addEventListener("click", () => {
+      message.innerText = texts[count];
+      count++;
+
+      if (count >= 5) {
+        noBtn.style.display = "none";
+        yesBtn.classList.add("fullscreen");
+        yesBtn.innerText = "CÓ 💖";
+      }
+    });
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 120 - 60;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      document.body.innerHTML = `
+        <div style="
+          height:100vh;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          flex-direction:column;
+          background:linear-gradient(120deg,#ff9a9e,#fad0c4);
+          color:white;
+          text-align:center;
+        ">
+          <h1 style="font-size:42px;">Không trốn được đâu 😈🌼</h1>
+          <img src="meo.png" style="width:300px;border-radius:20px;margin:20px;">
+          <p style="font-size:26px;">Hứa rồi đó nha,tối nay nhớ overnightt 🥰🎆</p>
+        </div>
+      `;
+    });
+  </script>
+
+</body>
+</html>
